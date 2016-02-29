@@ -1,1 +1,1 @@
-"# dynamic-serializer" 
+# dynamic-serializer
