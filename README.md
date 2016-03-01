@@ -1,6 +1,8 @@
 # dynamic-serializer
+Serializer/Deserializer wich move unknown bean properties into "Map<String, Object> dynamicFields"
 ##Example
 ## Beans 
+Bean for dynamicFields. Do not forget the anotation "@JsonAnySetter" which will move unknown bean properties into dynamicFields attribute
 ```java
 public class DynamicFields {
 
@@ -11,7 +13,9 @@ public class DynamicFields {
         this.dynamicFields.put(name, value);
     }
 }
-
+```
+Bean for Fr Invoice 
+```java
 public class InvoiceFr extends DynamicFields {
 
     private String id;
@@ -19,7 +23,9 @@ public class InvoiceFr extends DynamicFields {
     private Double amount;
     private Integer quantity;
 }
-
+```
+Bean for Eu Invoice
+```java
 public class InvoiceEu extends DynamicFields {
 
     private String id;
@@ -73,6 +79,7 @@ Json input has "Invoice Fr" structure
 DynamicSerializer serializer = new DynamicSerializer(InvoiceEu.class);
 InvoiceEu invoiceEu = (InvoiceEu) serializer.deSerialize(inputJson);
 ```
+The "quantity" property from InvoiceFr has been moved into "dynamicFields" of InvoiceEu bean
 ```java
 invoiceEu.getId();
 invoiceEu.getDynamicFields().get("quantity");
