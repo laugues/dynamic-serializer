@@ -23,10 +23,10 @@ public class InvoiceFr extends DynamicFields {
 
     /**
      * Constructor with empty #dynamicFields
-     * @param id
-     * @param tvaFr
-     * @param amount
-     * @param quantity
+     * @param id identifier
+     * @param tvaFr TVA FR
+     * @param amount amount
+     * @param quantity quantity
      */
     public InvoiceFr(String id, Double tvaFr, Double amount, Integer quantity) {
         super();
@@ -38,11 +38,11 @@ public class InvoiceFr extends DynamicFields {
 
     /**
      * Constructor
-     * @param id
-     * @param tvaFr
-     * @param amount
-     * @param quantity
-     * @param dynamicFields
+     * @param id identifier
+     * @param tvaFr TVA FR
+     * @param amount amount
+     * @param quantity quantity
+     * @param dynamicFields all fields which are not known by InvoiceFr
      */
     public InvoiceFr(String id, Double tvaFr, Double amount, Integer quantity, Map<String, Object> dynamicFields) {
         super(dynamicFields);

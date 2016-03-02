@@ -7,34 +7,64 @@ import java.io.IOException;
 /**
  * Created by lds on 29/02/2016.
  */
-public class DynamicSerializer<T> {
+public class DynamicSerializer<T, K> {
 
-    private Class<T> classType;
+    private Class<T> classTypeInput;
+    private Class<K> classTypeOutPut;
 
-    public DynamicSerializer(Class<T> classType) {
-        this.classType = classType;
+    public DynamicSerializer(Class<T> classTypeInput) {
+        this.classTypeInput = classTypeInput;
+        this.classTypeOutPut = (Class<K>) classTypeInput;
+    }
+
+    public DynamicSerializer(Class<T> classTypeInput, Class<K> classTypeOutPut) {
+        this.classTypeInput = classTypeInput;
+        this.classTypeOutPut = classTypeOutPut;
     }
 
     /**
      * Deserialize json into object
      * @param jsonToDeserialize the json to deserialize
-     * @return
-     * @throws IOException
+     * @return the deserialized object
+     * @throws IOException exception
      */
-    public T deSerialize(String jsonToDeserialize) throws IOException {
+    public K deSerialize(String jsonToDeserialize) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(jsonToDeserialize, this.classType);
+        return mapper.readValue(jsonToDeserialize, this.classTypeOutPut);
     }
 
 
     /**
      *
-     * @param objectToSerialize
-     * @return
-     * @throws IOException
+     * @param objectToSerialize object to serialize
+     * @return the serialize object into string
+     * @throws IOException exception
      */
     public String serialize(T objectToSerialize) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(objectToSerialize);
+    }
+
+
+    /**
+     *
+     * @param objectToTransform object to transform
+     * @return the object transformed
+     */
+    public K transform(T objectToTransform){
+        String json = null;
+        try {
+            json = this.serialize(objectToTransform);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        K invoiceEu = null;
+        try {
+            invoiceEu = (K) this.deSerialize(json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return invoiceEu;
     }
 }

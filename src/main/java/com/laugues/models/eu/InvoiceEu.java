@@ -22,10 +22,10 @@ public class InvoiceEu extends DynamicFields {
 
     /**
      * Constructor
-     * @param id
-     * @param tvaIntraCom
-     * @param amount
-     * @param dynamicFields
+     * @param id identifier
+     * @param tvaIntraCom TVA intra com
+     * @param amount amount
+     * @param dynamicFields all fields which are not known by InvoiceEu
      */
     public InvoiceEu(String id, String tvaIntraCom, Double amount,Map<String, Object> dynamicFields) {
         super(dynamicFields);

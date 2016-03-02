@@ -34,7 +34,7 @@ public class DynamicFields {
     }
 
     /**
-     * Add unknown bean field into Map<String, Object> of "dynamic fields"
+     * Add unknown bean field into Map of "dynamic fields"
      * @param name the name of the "dynamic field"
      * @param value the value of the "dynamic field"
      */
